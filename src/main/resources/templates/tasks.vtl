@@ -2,7 +2,7 @@
 
 <div class="row">
 #foreach($category in $categories)
-  <div class="col-md-1">
+  <div class="col-md-4">
     <h3><a href="/categories/$category.getId()">$category.getName()</a></h3>
  #foreach ($task in $category.getTasks())
    <li>$task.getDescription()</li>
