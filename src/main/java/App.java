@@ -36,12 +36,6 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    // get("/tasks/new", (request, response) -> {
-    //   HashMap<String, Object> model = new HashMap<String, Object>();
-    //   model.put("template", "templates/category-task-form.vtl");
-    //   return new ModelAndView(model, layout);
-    // }, new VelocityTemplateEngine());
-
     post("/tasks", (request,response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       Category category = Category.find(Integer.parseInt(request.queryParams("categoryId")));
@@ -56,6 +50,8 @@ public class App {
       Task newTask = new Task(description);
 
       category.addTask(newTask);
+      // category.removeTask(task);
+      // This is for removing a task
       model.put("category", category);
       model.put("template", "templates/category.vtl");
       return new ModelAndView(model, layout);

@@ -11,6 +11,8 @@ public class Category{
   public Category(String name) {
     mName = name;
     instances.add(this);
+    // instances.remove(this);
+    // This is for removing a category or task
     mId = instances.size();
     mTasks = new ArrayList<Task>();
   }
@@ -34,6 +36,16 @@ public class Category{
   public void addTask(Task task) {
     mTasks.add(task);
   }
+
+  // public void removeTask(Task task) {
+  //   mTasks.remove(task);
+  // }
+  // This is for removing a Task
+  //
+  // public static ArrayList<Category> removeCategory() {
+  //   mName.remove(name);
+  // }
+  // This is for removing a Category, but may work without this method
 
   public static Category find(int id){
     try {
