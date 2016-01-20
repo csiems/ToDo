@@ -54,7 +54,10 @@ public class App {
 
     post("categories/:id", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-      
+      model.put("category", Category.find(Integer.parseInt(request.params(":id"))));
+      Task task = new Task(request.queryParams("description"), Integer.parseInt(request.queryParams("categoryId")));
+      task.save();
+      model.put("task", task);
       model.put("template", "templates/category.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());

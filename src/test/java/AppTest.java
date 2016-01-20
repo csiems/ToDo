@@ -1,5 +1,6 @@
 import org.fluentlenium.adapter.FluentTest;
 import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.openqa.selenium.WebDriver;
@@ -17,6 +18,9 @@ public class AppTest extends FluentTest {
   public WebDriver getDefaultDriver() {
     return webDriver;
   }
+
+  @Rule
+  public DatabaseRule database = new DatabaseRule();
 
   @ClassRule
   public static ServerRule server = new ServerRule();
@@ -53,17 +57,33 @@ public class AppTest extends FluentTest {
 // As a user, I want to select a single list and see the tasks for it.
   @Test
   public void taskIsCreatedTest() {
-    Category myCategory = new Category("Household chores");
-    myCategory.save();
-    Category mySecondCategory = new Category("Grocery shopping");
-    mySecondCategory.save();
-    goTo("http://localhost:4567/categories/2");
-    click("a", withText("Add a new task"));
-    fill("#description").with("Buy flour");
+    goTo("http://localhost:4567/");
+    click("a", withText("Add a New Category"));
+    fill("#name").with("Household chores");
     submit(".btn");
-    assertThat(pageSource()).contains("Buy flour");
+    click("a", withText("Household chores"));
+    click("a", withText("Add a new task"));
+    fill("#description").with("Sweep floor");
+    submit(".btn");
+    assertThat(pageSource()).contains("Sweep floor");
   }
 
 // As a user, I want to add tasks to a list.
+  @Test
+  public void multipleTasksAreCreatedTest() {
+    goTo("http://localhost:4567/");
+    click("a", withText("Add a New Category"));
+    fill("#name").with("Household chores");
+    submit(".btn");
+    click("a", withText("Household chores"));
+    click("a", withText("Add a new task"));
+    fill("#description").with("Sweep floor");
+    submit(".btn");
+    click("a", withText("Add a new task"));
+    fill("#description").with("Vacuum the rug");
+    submit(".btn");
+    assertThat(pageSource()).contains("Sweep floor");
+    assertThat(pageSource()).contains("Vacuum the rug");
+  }
 
 }
