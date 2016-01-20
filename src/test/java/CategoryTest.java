@@ -46,4 +46,5 @@ public class CategoryTest {
       Task[] tasks = new Task[] { firstTask, secondTask };
       assertTrue(myCategory.getTasks().containsAll(Arrays.asList(tasks)));
     }
+
 }

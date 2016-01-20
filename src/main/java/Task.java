@@ -2,7 +2,6 @@ import java.util.List;
 import org.sql2o.*;
 
 public class Task {
-
   private int id;
   private int categoryId;
   private String description;
@@ -80,6 +79,7 @@ public class Task {
       con.createQuery(sql)
         .addParameter("id", id)
         .executeUpdate();
+
     }
   }
 

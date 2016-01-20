@@ -1,6 +1,6 @@
 import java.util.Arrays;
-
 import java.util.List;
+
 import org.sql2o.*;
 
 public class Category {
@@ -26,6 +26,9 @@ public class Category {
     }
   }
 
+  /* tells .equals() method to treat Category class objects from the database as
+  if they occupy the the same place in memory. the first part of the if-else
+  tells it to ignore rule if we are comparing objects of different classes */
   @Override
   public boolean equals(Object otherCategory) {
     if (!(otherCategory instanceof Category)) {
@@ -64,5 +67,4 @@ public class Category {
         .executeAndFetch(Task.class);
     }
   }
-
 }

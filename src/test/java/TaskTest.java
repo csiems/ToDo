@@ -53,5 +53,4 @@ public class TaskTest {
     assertEquals(savedTask.getCategoryId(), myCategory.getId());
   }
 
-
 }

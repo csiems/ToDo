@@ -13,6 +13,7 @@ public class DatabaseRule extends ExternalResource {
       String deleteCategoriesQuery = "DELETE FROM categories *;";
       con.createQuery(deleteTasksQuery).executeUpdate();
       con.createQuery(deleteCategoriesQuery).executeUpdate();
+
     }
   }
 }
