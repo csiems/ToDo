@@ -47,8 +47,8 @@ public class Task {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO tasks (description, categoryId) VALUES (:description, :categoryId)";
       this.id = (int) con.createQuery(sql, true)
-        .addParameter("description", description)
-        .addParameter("categoryId", categoryId)
+        .addParameter("description", this.description)
+        .addParameter("categoryId", this.categoryId)
         .executeUpdate()
         .getKey();
     }
