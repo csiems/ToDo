@@ -7,7 +7,6 @@ import static spark.Spark.*;
 
 public class App {
   public static void main(String[] args) {
-<<<<<<< HEAD
     staticFileLocation("/public");
     String layout = "templates/layout.vtl";
 
@@ -39,8 +38,5 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-=======
-    
->>>>>>> 6f15e21068c21f97880df2971f15de79129fa348
   }
 }
