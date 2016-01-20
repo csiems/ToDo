@@ -23,7 +23,7 @@
 # Logs and databases #
 ######################
 *.log
-#*.sql#
+# .sql # <--commenting out because working with sql db
 *.sqlite
 
 # OS generated files #

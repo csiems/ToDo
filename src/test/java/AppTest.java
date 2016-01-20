@@ -51,6 +51,19 @@ public class AppTest extends FluentTest {
   }
 
 // As a user, I want to select a single list and see the tasks for it.
+  @Test
+  public void taskIsCreatedTest() {
+    Category myCategory = new Category("Household chores");
+    myCategory.save();
+    Category mySecondCategory = new Category("Grocery shopping");
+    mySecondCategory.save();
+    goTo("http://localhost:4567/categories/2");
+    click("a", withText("Add a new task"));
+    fill("#description").with("Buy flour");
+    submit(".btn");
+    assertThat(pageSource()).contains("Buy flour");
+  }
+
 // As a user, I want to add tasks to a list.
 
 }

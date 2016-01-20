@@ -38,5 +38,26 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/categories/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("category", Category.find(Integer.parseInt(request.params(":id"))));
+      model.put("template", "templates/category.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/categories/:id/tasks/new", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("category", Category.find(Integer.parseInt(request.params(":id"))));
+      model.put("template", "templates/category-task-form.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("categories/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      
+      model.put("template", "templates/category.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
   }
 }
