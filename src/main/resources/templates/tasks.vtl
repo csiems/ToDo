@@ -1,16 +1,36 @@
-<h1>Task list!</h1>
+<table class="table table-hover sortable" id="taskTable">
+  <thead>
+    <tr>
+      <th>Task</th>
+      <th>Completed?</th>
+      <th>Due By</th>
+      <th>Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      #foreach ($task in $tasks)
 
-<p>Add a new task:</p>
+        <td><a href="/tasks/$task.getId()">$task.getDescription()</a></td>
 
-<form action="/tasks" method="post">
-  <label for="description">Task Description</label>
-  <input id="description" name="description" type="text">
+        #if(!($task.isComplete()))
+          <td><a href="/tasks/$task.getId()">Not complete</a></td>
+          #if (!($task.isDue_By().equals("3000-01-01")))
+            <td><a href="/tasks/$task.getId()">$task.isDue_By()</a></td>
+          #else
+            <td></td>
+          #end
+        #else
+          <td><a href="/tasks/$task.getId()">Finished!</a></td>
+          <td></td>
+        #end
 
-  <button type="submit">Add task</button>
-</form>
-
-#foreach ($task in $tasks)
-  <li><a href="/tasks/$task.getId()">$task.getDescription()</a></li>
-#end
-
-<p><a href='/'>Home</a></p>
+        #if (!($task.getCategories().size() == 0))
+          <td><a href="/tasks/$task.getId()">$task.getCategoryNames()</a></td>
+        #else
+          <td></td>
+        #end
+    </tr>
+      #end
+  </tbody>
+</table>

@@ -12,6 +12,8 @@ public class App {
 
     get("/", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
+      List<Task> tasks = Task.all();
+      model.put("tasks", tasks);
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -89,5 +91,39 @@ public class App {
       response.redirect("/tasks/" + taskId);
       return null;
     });
+
+    post("/complete_task", (request, response) -> {
+      int taskId = Integer.parseInt(request.queryParams("task_id"));
+      Task task = Task.find(taskId);
+      task.completeIt();
+      response.redirect("/tasks/" + taskId);
+      return null;
+    });
+
+    post("/add_due_by", (request, response) -> {
+      int taskId = Integer.parseInt(request.queryParams("task_id"));
+      String due_by = request.queryParams("due_by");
+      Task task = Task.find(taskId);
+      task.updateDue_By(due_by);
+      response.redirect("/tasks/" + taskId);
+      return null;
+    });
+
+    post("/delete_task", (request, response) -> {
+      int taskId = Integer.parseInt(request.queryParams("task_id"));
+      Task task = Task.find(taskId);
+      task.delete();
+      response.redirect("/tasks");
+      return null;
+    });
+
+    post("/delete_category", (request, response) -> {
+      int categoryId = Integer.parseInt(request.queryParams("category_id"));
+      Category category = Category.find(categoryId);
+      category.delete();
+      response.redirect("/categories");
+      return null;
+    });
+
   }
 }

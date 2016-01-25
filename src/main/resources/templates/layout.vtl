@@ -3,8 +3,44 @@
   <head>
     <title>To Do List</title>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+    <link rel='stylesheet' href="/css/App.css">
   </head>
   <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">To Do List!</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/categories">Categories</a></li>
+            <li><a href="/tasks">Tasks</a></li>
+          </ul>
+          <form class="navbar-form navbar-left" action="/categories" method="post">
+            <div class="form-group">
+              <input id="name" class="form-control" name="name" type="text" placeholder="Add a new category">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+          <form class="navbar-form navbar-left" action="/tasks" method="post">
+            <div class="form-group">
+              <input id="description" class="form-control" name="description" type="text" placeholder="Add a new task">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
     <div class="container">
 
       #parse( $template )
