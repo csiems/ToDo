@@ -36,7 +36,7 @@ public class AppTest extends FluentTest {
   @Test
   public void categoryIsCreatedTest() {
     goTo("http://localhost:4567/");
-    click("a", withText("Add a New Category"));
+    click("a", withText("Add or view a category"));
     fill("#name").with("Household chores");
     submit(".btn");
     assertThat(pageSource()).contains("Household chores");
@@ -58,11 +58,7 @@ public class AppTest extends FluentTest {
   @Test
   public void taskIsCreatedTest() {
     goTo("http://localhost:4567/");
-    click("a", withText("Add a New Category"));
-    fill("#name").with("Household chores");
-    submit(".btn");
-    click("a", withText("Household chores"));
-    click("a", withText("Add a new task"));
+    click("a", withText("Add or view a task"));
     fill("#description").with("Sweep floor");
     submit(".btn");
     assertThat(pageSource()).contains("Sweep floor");
@@ -71,17 +67,11 @@ public class AppTest extends FluentTest {
 // As a user, I want to add tasks to a list.
   @Test
   public void multipleTasksAreCreatedTest() {
-    goTo("http://localhost:4567/");
-    click("a", withText("Add a New Category"));
-    fill("#name").with("Household chores");
-    submit(".btn");
-    click("a", withText("Household chores"));
-    click("a", withText("Add a new task"));
-    fill("#description").with("Sweep floor");
-    submit(".btn");
-    click("a", withText("Add a new task"));
-    fill("#description").with("Vacuum the rug");
-    submit(".btn");
+    Task myFirstTask = new Task("Sweep floor");
+    myFirstTask.save();
+    Task mySecondTask = new Task("Vacuum the rug");
+    mySecondTask.save();
+    goTo("http://localhost:4567/tasks");
     assertThat(pageSource()).contains("Sweep floor");
     assertThat(pageSource()).contains("Vacuum the rug");
   }
