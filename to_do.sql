@@ -102,7 +102,9 @@ ALTER SEQUENCE categories_tasks_id_seq OWNED BY categories_tasks.id;
 
 CREATE TABLE tasks (
     id integer NOT NULL,
-    description character varying
+    description character varying,
+    complete boolean,
+    due_by date
 );
 
 
@@ -155,10 +157,9 @@ ALTER TABLE ONLY tasks ALTER COLUMN id SET DEFAULT nextval('tasks_id_seq'::regcl
 --
 
 COPY categories (id, name) FROM stdin;
-1	Grocery List
-2	Errands
-3	adsfadsf
-4	Household chores
+20	Weekly Chores
+21	Monthly Chores
+22	Shopping
 \.
 
 
@@ -166,7 +167,7 @@ COPY categories (id, name) FROM stdin;
 -- Name: categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('categories_id_seq', 4, true);
+SELECT pg_catalog.setval('categories_id_seq', 23, true);
 
 
 --
@@ -174,6 +175,11 @@ SELECT pg_catalog.setval('categories_id_seq', 4, true);
 --
 
 COPY categories_tasks (id, category_id, task_id) FROM stdin;
+30	20	40
+31	20	36
+34	21	39
+35	20	35
+38	21	41
 \.
 
 
@@ -181,17 +187,23 @@ COPY categories_tasks (id, category_id, task_id) FROM stdin;
 -- Name: categories_tasks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('categories_tasks_id_seq', 1, false);
+SELECT pg_catalog.setval('categories_tasks_id_seq', 38, true);
 
 
 --
 -- Data for Name: tasks; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY tasks (id, description) FROM stdin;
-3	Greek Yogurt
-4	Cherry Tomatoes
-5	Mow the Lawn
+COPY tasks (id, description, complete, due_by) FROM stdin;
+32	Make Dinner	f	2016-01-25
+40	Dust the Furniture	f	2016-01-30
+36	Take Out the Trash	f	2016-01-28
+35	Water Plants	f	2016-01-30
+33	Feed the Cat	f	2016-01-25
+31	Wash Dishes	t	2016-01-25
+41	Fix the Car	f	2016-01-29
+34	Do Laundry	t	2016-01-25
+39	Clean the Refrigerator	t	2016-01-31
 \.
 
 
@@ -199,7 +211,7 @@ COPY tasks (id, description) FROM stdin;
 -- Name: tasks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('tasks_id_seq', 5, true);
+SELECT pg_catalog.setval('tasks_id_seq', 41, true);
 
 
 --
