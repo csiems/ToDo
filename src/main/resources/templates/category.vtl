@@ -13,8 +13,16 @@
     </tbody>
   </table>
 #end
-
 <hr>
+
+<form action="/update_category" method="post">
+    <input id="category_id" name="category_id" type="hidden" value="$category.getId()">
+    <label for="name">Update this category:</label>
+    <input id="name" name="name" type="text">
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+<hr>
+
 <form action='/delete_category' method='post'>
     <input id="category_id" name="category_id" type="hidden" value="$category.getId()">
     <label for="delete_category">Remove this category:</label>

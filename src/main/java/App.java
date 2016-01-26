@@ -125,5 +125,24 @@ public class App {
       return null;
     });
 
+    post("/update_category", (request, response) -> {
+      int categoryId = Integer.parseInt(request.queryParams("category_id"));
+      Category category = Category.find(categoryId);
+      String name = request.queryParams("name");
+      category.update(name);
+      response.redirect("/categories/" + categoryId);
+      return null;
+    });
+
+    post("/update_task", (request, response) -> {
+      int taskId = Integer.parseInt(request.queryParams("task_id"));
+      Task task = Task.find(taskId);
+      String description = request.queryParams("description");
+      task.updateDescription(description);
+      response.redirect("/tasks/" + taskId);
+      return null;
+    });
+
+
   }
 }

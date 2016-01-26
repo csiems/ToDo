@@ -1,6 +1,6 @@
 <h1>$task.getDescription()</h1>
 
-#if($task.getCategories())
+#if(!($task.getCategories().size == 0))
   <h2>Here are the categories for this task:</h2>
   <table class="table table-hover sortable" id="categoryTable">
     <tbody>
@@ -41,6 +41,15 @@
     <button type='submit' class='btn btn-default'>Add category</button>
 </form>
 <hr>
+
+<form action="/update_task" method="post">
+    <input id="task_id" name="task_id" type="hidden" value="$task.getId()">
+    <label for="description">Update this Task:</label>
+    <input id="description" name="description" type="text">
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+<hr>
+
 <form action='/delete_task' method='post'>
     <input id="task_id" name="task_id" type="hidden" value="$task.getId()">
     <label for="delete_task">Remove this task:</label>

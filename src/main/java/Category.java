@@ -21,7 +21,7 @@ public class Category {
   }
 
   public static List<Category> all() {
-    String sql = "SELECT id, name FROM categories";
+    String sql = "SELECT id, name FROM categories ORDER BY NAME ASC";
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Category.class);
     }
@@ -60,7 +60,7 @@ public class Category {
     }
   }
 
-  public void update(String description) {
+  public void update(String name) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "UPDATE categories SET name = :name WHERE id = :id";
       con.createQuery(sql)
