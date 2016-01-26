@@ -6,17 +6,21 @@
 
 ## Description
 
-The to do list will allow to track your daily tasks and create multiple category tags to organize them. You can also record the task's due date and whether or not the task has been completed.
+The To Do List! will allow to track your daily tasks and create multiple category tags to organize them. You can also record the task's due date and whether or not the task has been completed.
 
 ## Setup/Installation Requirements
 
-* _This is a great place_
-* _to list setup instructions_
-* _in a simple_
-* _easy-to-understand_
-* _format_
-
-_{Leave nothing to chance! You want it to be easy for potential users, employers and collaborators to run your app. Do I need to run a server? How should I set up my databases? Is there other code this app depends on?}_
+* Clone this repository.
+* Make sure you have Gradle, Java and Postgres installed.
+* In a terminal: Open `postgres`
+* Open psql in a new tab
+* Run the following command in psql to create the database
+`CREATE DATABASE to_do`
+* Navigate to your project directory in your terminal and run the following command to populate your database
+`psql to_do < to_do.sql`
+* In the top level of the cloned directory, run the following command in your terminal:
+`gradle run`
+* Open your web browser of choice to localhost:4567
 
 ## Technologies Used
 
